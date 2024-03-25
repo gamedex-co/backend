@@ -1,5 +1,7 @@
 package com.gamedex.backend.auth.dto;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,5 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthResponse {
-    private String token;
+    private UserDetails user;
+    private String accessToken;
 }
