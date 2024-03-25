@@ -28,11 +28,11 @@ public class SecurityConfig {
                 http
                                 .csrf((csrf) -> csrf.disable())
                                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                                                .requestMatchers("/swagger-ui/index.html").permitAll()
-                                                .requestMatchers("/auth").permitAll()
+                                                .requestMatchers("/swagger-ui/**").permitAll()
+                                                .requestMatchers("/v3/api-docs/**").permitAll()
+                                                .requestMatchers("/auth/**").permitAll()
                                                 // .requestMatchers("/admin/**").hasRole("ADMIN")
-                                                .requestMatchers("/user/**").permitAll()
-                                                .anyRequest().permitAll())
+                                                .anyRequest().authenticated())
                                 .sessionManagement((sessionManager) -> sessionManager
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                                 .authenticationProvider(authProvider)
