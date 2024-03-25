@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gamedex.backend.user.enums.RoleEnum;
 
 import jakarta.validation.constraints.NotBlank;
@@ -55,16 +56,19 @@ public class UserEntity implements UserDetails {
         return List.of(new SimpleGrantedAuthority((role.name())));
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
@@ -73,6 +77,12 @@ public class UserEntity implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public String getPassword() {
+        return this.password;
     }
 
 }
