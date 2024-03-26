@@ -26,13 +26,21 @@ public class AuthController {
     @Operation(summary = "Login with username and password")
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginPOSTRequest request) throws Exception {
-        return new ResponseEntity<>(authService.login(request), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(authService.login(request), HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @Operation(summary = "Register a new user")
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterPOSTRequest request) throws Exception {
-        return new ResponseEntity<>(authService.register(request), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(authService.register(request), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
 }

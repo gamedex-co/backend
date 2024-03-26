@@ -1,6 +1,7 @@
 package com.gamedex.backend.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,17 @@ public class UserServiceImpl implements UserService {
         }
 
         throw new Exception("User not found");
+    }
+
+    @Override
+    public UserEntity getUserByUsername(String username) throws Exception {
+        Optional<UserEntity> user = userRepository.findByUsername(username);
+
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new Exception("User not found");
+        }
     }
 
 }
