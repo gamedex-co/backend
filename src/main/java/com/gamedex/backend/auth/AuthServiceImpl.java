@@ -41,7 +41,6 @@ public class AuthServiceImpl implements AuthService {
             String token = jwtService.getToken(user);
 
             return AuthResponse.builder()
-                    .user(user)
                     .accessToken(token)
                     .build();
         }
