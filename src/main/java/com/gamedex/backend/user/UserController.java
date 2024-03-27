@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class UserController {
     private JwtService jwtService;
 
     @Operation(summary = "Get all users")
-    @GetMapping("/getUsers")
+    @GetMapping(value = "/getUsers", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserEntity>> getUsers() throws Exception {
         List<UserEntity> users = userService.getUsers();
 
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @Operation(summary = "Get user by ID")
-    @GetMapping("/getUserById")
+    @GetMapping(value = "/getUserById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserEntity> getUserById(@RequestParam String userId) throws Exception {
         UserEntity user = userService.getUser(userId);
 
@@ -52,7 +53,7 @@ public class UserController {
     }
 
     @Operation(summary = "Get user by accessToken")
-    @GetMapping("/getUserByToken")
+    @GetMapping(value = "/getUserByToken", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserEntity> getUserByAccessToken(@RequestParam String accessToken) throws Exception {
         if (accessToken != null) {
             String username = jwtService.getUsernameFromToken(accessToken);

@@ -35,7 +35,7 @@ public class AuthController {
     }
 
     @Operation(summary = "Register a new user")
-    @PostMapping("/register")
+    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterPOSTRequest request) throws Exception {
         try {
             return new ResponseEntity<>(authService.register(request), HttpStatus.CREATED);
